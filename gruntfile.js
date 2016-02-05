@@ -11,9 +11,9 @@ module.exports = function (grunt) {
 					rebase: true
 				},
 				files: {
-					'dist/mapa-digital-oficial.min.css': [
+					/*'dist/mapa-digital-oficial.min.css': [
 						'app/resources/styles/style.css'
-					]
+					]*/
 				}
 			}
 		},
@@ -23,10 +23,10 @@ module.exports = function (grunt) {
 			},
 			applib: {
 				src: [
-				    'app/app.js',
+				    /*'app/app.js',
 				    'app/services/appDataServices.js',
 				    'app/services/searchServices.js',
-					'app/controllers/mainController.js'
+					'app/controllers/mainController.js'*/
 				],
 				dest: 'dist/mapa-digital-oficial.min.js'
 			}

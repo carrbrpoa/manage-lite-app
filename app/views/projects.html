@@ -1,7 +1,11 @@
-<div>
+<div ng-controller="projectsController as projectsCtrl">
     <h1>
         <span>Projects</span>
-        <button class='btn btn-sm btn-success pull-right'>New</button>
+        <button class="btn btn-sm btn-success pull-right">New</button>
     </h1>
     <hr />
+    
+    <div>
+        <div class="project-name" ng-repeat="project in projectsCtrl.projects">{{project.name}}</div>
+    </div>
 </div>
