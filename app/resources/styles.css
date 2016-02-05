@@ -1,0 +1,14 @@
+html, body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.left-menu {
+	width: 129px;
+	float: left;
+}
+
+.content {
+	/*float: right;*/
+}
