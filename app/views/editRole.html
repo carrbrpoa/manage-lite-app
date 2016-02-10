@@ -1,0 +1,19 @@
+<div ng-controller="editRoleController as editRoleCtrl">
+    <form name="editRole" novalidate>
+        <h3>{{editRoleCtrl.title}}</h3>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <span>*</span>
+            <input type="text" class="form-control" name="name" placeholder="Enter role name" ng-model="editRoleCtrl.role.name" required>
+            <span class="text-danger" ng-show="editRole.name.$touched && editRole.name.$invalid">Role name is required</span>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="editRoleCtrl.role.enabled">
+                Enabled
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="editRoleCtrl.submit(editRoleCtrl.role)">Save</button>
+        <a class="btn btn-warning" ui-sref="roles.list">Cancel</a>
+    </form>
+</div>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<base href="./">
+
 <title>ManageLite</title>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -24,7 +26,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects">Projects</a></li>
                     <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators">Collaborators</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles">Roles</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list">Roles</a></li>
                     <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings">Settings</a></li>
                 </ul>
             </div>
@@ -59,7 +61,10 @@
 
     <script src="app/app.js"></script>
     <script src="app/services/projectService.js"></script>
+    <script src="app/services/roleService.js"></script>
     <script src="app/controllers/menuController.js"></script>
     <script src="app/controllers/projectsController.js"></script>
+    <script src="app/controllers/rolesController.js"></script>
+    <script src="app/controllers/editRoleController.js"></script>
 </body>
 </html>

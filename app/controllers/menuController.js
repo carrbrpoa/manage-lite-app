@@ -2,6 +2,7 @@ angular.module('manageLiteApp').controller('menuController', [ '$scope', '$locat
     var ctrl = this;
 
     ctrl.isActive = function(viewLocation) {
-        return viewLocation === $location.path();
+        return $location.path().lastIndexOf(viewLocation, 0) === 0;
+        //return viewLocation === $location.path();
     }
 } ]);

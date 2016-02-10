@@ -9,7 +9,7 @@ angular.module('manageLiteApp').controller('projectsController', [ '$scope', 'pr
         });
     }
     
-    ctrl.init = function() {
+    ctrl.activate = function() {
         // Load projects
         ctrl.getProjects();
     }();
