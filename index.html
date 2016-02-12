@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="manageLiteApp">
 <head>
 <base href="./">
 
 <title>ManageLite</title>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="app/resources/themes/flatly/bootstrap.min.css" />
+<link rel="stylesheet" ng-href="app/resources/themes/{{theme}}/bootstrap.min.css" />
+<link rel="stylesheet" ng-href="app/resources/themes/{{theme}}/custom.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" />
 <link rel="stylesheet" href="app/resources/styles.css" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body ng-app="manageLiteApp">
+<body ng-cloak>
+    <toaster-container toaster-options="{'close-button': true, 'position-class': 'toast-top-right'}"></toaster-container>
+    
     <nav class="navbar navbar-default navbar-static-top" ng-controller="menuController as menuCtrl">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -34,6 +38,8 @@
     </nav>
 
     <div class="container">
+        <span ng-if="theme === 'flatly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="flatly"></span>
+        <span ng-if="theme === 'darkly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="darkly"></span>
         <div class="row">
             <!-- 
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-3">
@@ -58,13 +64,21 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/restangular/1.5.1/restangular.min.js"></script>
+    <script src="//code.angularjs.org/1.4.9/angular-animate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-spinner/0.8.0/angular-spinner.min.js"></script>
 
     <script src="app/app.js"></script>
     <script src="app/services/projectService.js"></script>
     <script src="app/services/roleService.js"></script>
+    <script src="app/controllers/parentController.js"></script>
     <script src="app/controllers/menuController.js"></script>
     <script src="app/controllers/projectsController.js"></script>
     <script src="app/controllers/rolesController.js"></script>
     <script src="app/controllers/editRoleController.js"></script>
+    <script src="app/controllers/settingsController.js"></script>
 </body>
 </html>

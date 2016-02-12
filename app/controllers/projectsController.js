@@ -1,4 +1,4 @@
-angular.module('manageLiteApp').controller('projectsController', [ '$scope', 'projectService', function($scope, projectService) {
+function projectsController($scope, projectService) {
     var ctrl = this;
     ctrl.projects = [];
 
@@ -13,4 +13,8 @@ angular.module('manageLiteApp').controller('projectsController', [ '$scope', 'pr
         // Load projects
         ctrl.getProjects();
     }();
-} ]);
+};
+
+projectsController.$inject = ['$scope', 'projectService'];
+
+angular.module('manageLiteApp').controller('projectsController', projectsController);
