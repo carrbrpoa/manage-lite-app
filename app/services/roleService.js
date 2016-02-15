@@ -1,15 +1,30 @@
-angular.module('manageLiteApp').factory('roleService', [ '$http', '$q', function($http, $q) {
+angular.module('manageLiteApp').factory('roleService', [ 'Restangular', function(Restangular) {
+    
+    var baseRoles = Restangular.all('roles');
     
     var roleService = {
-
-        /*getRoles: function() {
-            var deferred = $q.defer();
-            // Mock
-            deferred.resolve([{id: 1, name: 'Role 1'}, {id: 2, name: 'Role 2'}]);
-            
-            return deferred.promise;
-        }*/
-    
+        getRoles: function() {
+            return baseRoles.getList().then(function(roles) {
+                return roles;
+            }, function(error) {
+                return error;
+            });
+        },
+        saveRole: function(role) {
+            if (role.id > 0) {
+                return role.save();
+            }
+            else {
+                return baseRoles.post(role);
+            }
+        },
+        getRole: function(id) {
+            return baseRoles.get(id).then(function(role) {
+                return role;
+            }, function(error) {
+                return error;
+            });
+        }
     }
 
     return roleService;

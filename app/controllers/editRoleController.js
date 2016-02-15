@@ -1,23 +1,14 @@
-function editRoleController($scope, $stateParams, $state, $controller, Restangular, toaster, roleService) {
-    var inherited = $controller('parentController', {$state: $state});
+function editRoleController($scope, $stateParams, $state, $controller, toaster, roleService) {
+    var inherited = $controller('parentController', {$state: $state, toaster: toaster});
     angular.extend(this, inherited);
     
     var ctrl = this;
     
-    ctrl.baseRoles = Restangular.all('roles');
     ctrl.title = 'New Role';
     ctrl.role = { enabled: true };
     
-    ctrl.submit = function(role) {
-        var saveAction;
-        if (ctrl.role.id > 0) {
-            saveAction = ctrl.role.save();
-        }
-        else {
-            saveAction = ctrl.baseRoles.post(ctrl.role);
-        }
-        
-        saveAction.then(function(savedObject) {
+    ctrl.submit = function() {
+        roleService.saveRole(ctrl.role).then(function(savedObject) {
             if (savedObject) {
                 toaster.pop('success', 'Success', 'Save successful');
                 ctrl.initializeRole(savedObject);
@@ -34,12 +25,13 @@ function editRoleController($scope, $stateParams, $state, $controller, Restangul
     
     ctrl.initializeRole = function(role) {
         ctrl.role = role;
+        ctrl.editStamp(ctrl.role);
         ctrl.setRoleTitle();
     };
     
     ctrl.activate = function() {
         if ($stateParams.roleId) {
-            ctrl.baseRoles.get($stateParams.roleId).then(function(role) {
+            roleService.getRole($stateParams.roleId).then(function(role) {
                 ctrl.initializeRole(role);
             }, function(error) {
                 ctrl.handleError(error, 'roles.list');
@@ -48,6 +40,6 @@ function editRoleController($scope, $stateParams, $state, $controller, Restangul
     }();
 };
 
-editRoleController.$inject = ['$scope', '$stateParams', '$state', '$controller', 'Restangular', 'toaster', 'roleService'];
+editRoleController.$inject = ['$scope', '$stateParams', '$state', '$controller', 'toaster', 'roleService'];
 
 angular.module('manageLiteApp').controller('editRoleController', editRoleController);

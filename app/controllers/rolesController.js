@@ -1,27 +1,27 @@
-function rolesController($scope, $rootScope, Restangular, roleService) {
+function rolesController($scope, roleService) {
     var ctrl = this;
     ctrl.currentRole = {};
-    ctrl.baseRoles = Restangular.all('roles');
+    //ctrl.baseRoles = Restangular.all('roles');
     ctrl.roles = [];
 
     ctrl.getRoles = function() {
-        /*roleService.getRoles().then(function(response) {
+        roleService.getRoles().then(function(response) {
             ctrl.roles = response;
         }, function(error) {
-        });*/
-        
-        ctrl.baseRoles.getList().then(function(roles) {
-            ctrl.roles = roles;
+            ctrl.handleError(error);
         });
+        
+        /*ctrl.baseRoles.getList().then(function(roles) {
+            ctrl.roles = roles;
+        });*/
     }
     
     ctrl.activate = function() {
-        //$rootScope.theme = 'darkly';
         // Load roles
         ctrl.getRoles();
     }();
 }
 
-rolesController.$inject = ['$scope', '$rootScope', 'Restangular', 'roleService'];
+rolesController.$inject = ['$scope', 'roleService'];
 
 angular.module('manageLiteApp').controller('rolesController', rolesController);

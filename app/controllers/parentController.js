@@ -13,6 +13,12 @@ function parentController($state, toaster) {
             $state.go(transitionTo);
         }
     };
+    
+    ctrl.editStamp = function(entity) {
+        if (entity) {
+            entity.startedEditAt = new Date();
+        }
+    };
 }
 
 parentController.$inject = ['$state', 'toaster'];
