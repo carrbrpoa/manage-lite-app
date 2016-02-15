@@ -3,8 +3,8 @@ angular.module('manageLiteApp').factory('roleService', [ 'Restangular', function
     var baseRoles = Restangular.all('roles');
     
     var roleService = {
-        getRoles: function() {
-            return baseRoles.getList().then(function(roles) {
+        getRoles: function(query) {
+            return baseRoles.getList(query).then(function(roles) {
                 return roles;
             }, function(error) {
                 return error;

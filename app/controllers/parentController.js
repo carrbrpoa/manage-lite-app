@@ -19,6 +19,10 @@ function parentController($state, toaster) {
             entity.startedEditAt = new Date();
         }
     };
+    
+    ctrl.isNewEntity = function(entity) {
+        return entity && (!entity.id || entity.id === 0);
+    };
 }
 
 parentController.$inject = ['$state', 'toaster'];

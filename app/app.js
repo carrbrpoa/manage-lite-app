@@ -45,7 +45,14 @@ angular.module("manageLiteApp").config(
                 templateUrl : "app/views/projects.html"
             }).state('collaborators', {
                 url : "/collaborators",
+                abstract : true,
                 templateUrl : "app/views/collaborators.html"
+            }).state('collaborators.list', {
+                url : "",
+                templateUrl : "app/views/listCollaborators.html"
+            }).state('collaborators.edit', {
+                url : "/edit/:collaboratorId",
+                templateUrl : "app/views/editCollaborator.html"
             }).state('roles', {
                 url : "/roles",
                 abstract : true,

@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbar-1">
                 <ul class="nav navbar-nav">
                     <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects">Projects</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators">Collaborators</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators.list">Collaborators</a></li>
                     <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list">Roles</a></li>
                     <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings">Settings</a></li>
                 </ul>
@@ -74,11 +74,14 @@
     <script src="app/app.js"></script>
     <script src="app/services/projectService.js"></script>
     <script src="app/services/roleService.js"></script>
+    <script src="app/services/collaboratorService.js"></script>
     <script src="app/controllers/parentController.js"></script>
     <script src="app/controllers/menuController.js"></script>
     <script src="app/controllers/projectsController.js"></script>
     <script src="app/controllers/rolesController.js"></script>
     <script src="app/controllers/editRoleController.js"></script>
     <script src="app/controllers/settingsController.js"></script>
+    <script src="app/controllers/collaboratorsController.js"></script>
+    <script src="app/controllers/editCollaboratorController.js"></script>
 </body>
 </html>

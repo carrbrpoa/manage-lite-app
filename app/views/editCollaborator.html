@@ -1,0 +1,37 @@
+<div ng-controller="editCollaboratorController as editCollaboratorCtrl">
+    <form name="editCollaborator" novalidate>
+        <h3>{{editCollaboratorCtrl.title}}</h3>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <span>*</span>
+            <input type="text" class="form-control" name="username" placeholder="Enter collaborator username" ng-model="editCollaboratorCtrl.collaborator.username" required>
+            <span class="text-danger" ng-show="editCollaborator.username.$touched && editCollaborator.username.$invalid">Collaborator username is required</span>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <span>*</span>
+            <input type="email" class="form-control" name="email" placeholder="Enter collaborator e-mail" ng-model="editCollaboratorCtrl.collaborator.email" required>
+            <span class="text-danger" ng-show="editCollaborator.email.$touched && editCollaborator.email.$invalid">Collaborator e-mail is required and must be a valid e-mail</span>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Enter collaborator name" ng-model="editCollaboratorCtrl.collaborator.name">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <span>*</span>
+            <select class="form-control" name="role" ng-model="editCollaboratorCtrl.collaborator.RoleId" ng-options="role.id as role.name for role in ::editCollaboratorCtrl.roles | orderBy:'name'" required>
+                <option value="" class="text-muted">Choose collaborator role</option>
+            </select>
+            <span class="text-danger" ng-show="editCollaborator.role.$touched && editCollaborator.role.$invalid">Collaborator role is required</span>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="editCollaboratorCtrl.collaborator.enabled">
+                Enabled
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="editCollaboratorCtrl.submit()">Save</button>
+        <a class="btn btn-warning" ui-sref="collaborators.list">Cancel</a>
+    </form>
+</div>

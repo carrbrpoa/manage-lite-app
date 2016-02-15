@@ -1,5 +1,5 @@
 <div ng-controller="rolesController as rolesCtrl">
     <div ng-repeat="role in rolesCtrl.roles | orderBy:'name'">
-        <a class="role-name" ui-sref="roles.edit({roleId:role.id})">{{role.name}}</a>
+        <a class="role-name" ui-sref="roles.edit({roleId:role.id})" ng-class="{'disabled-entity': !role.enabled}">{{role.name}}</a>
     </div>
 </div>

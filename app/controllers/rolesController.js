@@ -1,7 +1,5 @@
 function rolesController($scope, roleService) {
     var ctrl = this;
-    ctrl.currentRole = {};
-    //ctrl.baseRoles = Restangular.all('roles');
     ctrl.roles = [];
 
     ctrl.getRoles = function() {
@@ -10,10 +8,6 @@ function rolesController($scope, roleService) {
         }, function(error) {
             ctrl.handleError(error);
         });
-        
-        /*ctrl.baseRoles.getList().then(function(roles) {
-            ctrl.roles = roles;
-        });*/
     }
     
     ctrl.activate = function() {

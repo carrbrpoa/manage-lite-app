@@ -1,0 +1,5 @@
+<div ng-controller="collaboratorsController as collaboratorsCtrl">
+    <div ng-repeat="collaborator in collaboratorsCtrl.collaborators | orderBy:'name||username'">
+        <a class="collaborator-name" ui-sref="collaborators.edit({collaboratorId:collaborator.id})" ng-class="{'disabled-entity': !collaborator.enabled}">{{collaborator.name || collaborator.username}}</a>
+    </div>
+</div>
