@@ -1,14 +1,32 @@
-angular.module('manageLiteApp').factory('projectService', [ '$http', '$q', function($http, $q) {
+angular.module('manageLiteApp').factory('projectService', [ 'Restangular', function(Restangular) {
+    
+    var baseProjects = Restangular.all('projects');
     
     var projectService = {
 
-        getProjects : function() {
-            var deferred = $q.defer();
-            //
-            // Mock
-            deferred.resolve([{name: 'Project 1'}, {name: 'Project 2'}, {name: 'Project 3'}]);
-            
-            return deferred.promise;
+        getProjects : function(query) {
+            return baseProjects.getList(query).then(function(projects) {
+                return projects;
+            }, function(error) {
+                return error;
+            });
+        },
+        
+        saveProject: function(project) {
+            if (project.id > 0) {
+                return project.save();
+            }
+            else {
+                return baseProjects.post(project);
+            }
+        },
+        
+        getProject: function(id) {
+            return baseProjects.get(id).then(function(project) {
+                return project;
+            }, function(error) {
+                return error;
+            });
         }
     }
 

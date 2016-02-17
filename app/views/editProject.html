@@ -1,0 +1,19 @@
+<div ng-controller="editProjectController as editProjectCtrl">
+    <form name="editProject" novalidate>
+        <h3>{{editProjectCtrl.title}}</h3>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <span>*</span>
+            <input type="text" class="form-control" name="name" placeholder="Enter project name" ng-model="editProjectCtrl.project.name" required>
+            <span class="text-danger" ng-show="editProject.name.$touched && editProject.name.$invalid">Project name is required</span>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="editProjectCtrl.project.archived">
+                Archived
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="editProjectCtrl.submit()">Save</button>
+        <a class="btn btn-warning" ui-sref="projects.list">Cancel</a>
+    </form>
+</div>

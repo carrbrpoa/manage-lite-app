@@ -1,0 +1,5 @@
+<div ng-controller="projectsController as projectsCtrl">
+    <div ng-repeat="project in projectsCtrl.projects | orderBy:'name'">
+        <a class="project-name" ui-sref="projects.edit({projectId:project.id})" ng-class="{'disabled-entity': project.archived}">{{project.name}}</a>
+    </div>
+</div>

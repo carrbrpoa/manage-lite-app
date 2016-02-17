@@ -42,7 +42,14 @@ angular.module("manageLiteApp").config(
             // Now set up the states
             $stateProvider.state('projects', {
                 url : "/projects",
+                abstract : true,
                 templateUrl : "app/views/projects.html"
+            }).state('projects.list', {
+                url : "",
+                templateUrl : "app/views/listProjects.html"
+            }).state('projects.edit', {
+                url : "/edit/:projectId",
+                templateUrl : "app/views/editProject.html"
             }).state('collaborators', {
                 url : "/collaborators",
                 abstract : true,
