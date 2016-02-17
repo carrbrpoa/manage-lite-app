@@ -23,6 +23,20 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
         ctrl.title = ctrl.project.id > 0 ? ('Edit Project ' + ctrl.project.name) : ctrl.title; 
     };
     
+    ctrl.addSprint = function() {
+        ctrl.project.sprints = ctrl.project.sprints || [];
+        ctrl.project.sprints.push({});
+    };
+    
+    ctrl.removeSprint = function(sprint) {
+        var index = ctrl.project.sprints.indexOf(sprint);
+        ctrl.project.sprints.splice(index, 1);
+        
+        if (ctrl.project.sprints.length === 0) {
+            delete ctrl.project.sprints;
+        }
+    };
+    
     ctrl.initializeProject = function(project) {
         ctrl.project = project;
         ctrl.editStamp(ctrl.project);

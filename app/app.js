@@ -88,7 +88,21 @@ angular.module("manageLiteApp").config(
                     return elem;
                 }
                 return elem;
-            })
+            });
+            
+            // add a response interceptor
+            /*RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+              var extractedData;
+              // .. to look for getList operations
+              if (operation === "getList") {
+                // .. and handle the data and meta data
+                extractedData = data.data || data;
+                //extractedData.meta = data.data.meta;
+              } else {
+                extractedData = data.data || data;
+              }
+              return extractedData;
+            });*/
             
             $httpProvider.interceptors.push('httpInterceptor');
             

@@ -20,7 +20,7 @@
         <div class="form-group">
             <label for="role">Role</label>
             <span>*</span>
-            <select class="form-control" name="role" ng-model="editCollaboratorCtrl.collaborator.RoleId" ng-options="role.id as role.name for role in ::editCollaboratorCtrl.roles | orderBy:'name'" required>
+            <select class="form-control" name="role" ng-model="editCollaboratorCtrl.collaborator.roleId" ng-options="role.id as role.name for role in ::editCollaboratorCtrl.roles | orderBy:'name'" required>
                 <option value="" class="text-muted">Choose collaborator role</option>
             </select>
             <span class="text-danger" ng-show="editCollaborator.role.$touched && editCollaborator.role.$invalid">Collaborator role is required</span>
@@ -31,7 +31,7 @@
                 Enabled
             </label>
         </div>
-        <button type="submit" class="btn btn-default" ng-click="editCollaboratorCtrl.submit()">Save</button>
-        <a class="btn btn-warning" ui-sref="collaborators.list">Cancel</a>
+        <button type="submit" class="btn btn-primary" ng-click="editCollaboratorCtrl.submit()">Save</button>
+        <a class="btn btn-default" ui-sref="collaborators.list">Cancel</a>
     </form>
 </div>

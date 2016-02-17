@@ -13,7 +13,20 @@
                 Archived
             </label>
         </div>
-        <button type="submit" class="btn btn-default" ng-click="editProjectCtrl.submit()">Save</button>
-        <a class="btn btn-warning" ui-sref="projects.list">Cancel</a>
+        
+        <h3>Sprints</h3>
+        <button class="btn btn-primary btn-xs" ng-click="editProjectCtrl.addSprint()" ng-hide="editProjectCtrl.project.sprints">Add sprint</button>
+        <div ng-form="editSprint{{$index}}" ng-repeat="sprint in editProjectCtrl.project.sprints" class="well well-lg">
+            <div class="form-group">
+                <label for="sprintName">Name</label>
+                <span>*</span>
+                <input type="text" class="form-control" name="sprintName" placeholder="Enter sprint name" ng-model="sprint.name" required>
+                <span class="text-danger" ng-show="editSprint{{$index}}.sprintName.$touched && editSprint{{$index}}.sprintName.$invalid">Sprint name is required</span>
+                <button ng-click="editProjectCtrl.removeSprint(sprint)" class="btn btn-danger btn-xs pull-right">Remove</button>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" ng-click="editProjectCtrl.submit()">Save</button>
+        <a class="btn btn-default" ui-sref="projects.list">Cancel</a>
     </form>
 </div>
