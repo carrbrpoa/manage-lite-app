@@ -15,18 +15,55 @@
         </div>
         
         <h3>Sprints</h3>
-        <button class="btn btn-primary btn-xs" ng-click="editProjectCtrl.addSprint()" ng-hide="editProjectCtrl.project.sprints">Add sprint</button>
-        <div ng-form="editSprint{{$index}}" ng-repeat="sprint in editProjectCtrl.project.sprints" class="well well-lg">
+        
+        <div ng-form="editSprint{{$index}}" ng-repeat="sprint in editProjectCtrl.project.sprints" class="panel panel-default panel-body">
             <div class="form-group">
                 <label for="sprintName">Name</label>
                 <span>*</span>
                 <input type="text" class="form-control" name="sprintName" placeholder="Enter sprint name" ng-model="sprint.name" required>
                 <span class="text-danger" ng-show="editSprint{{$index}}.sprintName.$touched && editSprint{{$index}}.sprintName.$invalid">Sprint name is required</span>
-                <button ng-click="editProjectCtrl.removeSprint(sprint)" class="btn btn-danger btn-xs pull-right">Remove</button>
             </div>
+            <div class="form-inline col-lg-12 col-md-12 nopadding">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 nopadding">
+                    <label for="sprintStart">Starts on</label>
+                    <span>*</span>
+                    <p class="input-group">
+                        <input type="text" class="form-control" name="sprintStart" placeholder="Enter sprint start date" is-open="sprint.startPicker.opened" uib-datepicker-popup ng-model="sprint.start" 
+                            close-text="Close" date-disabled="editProjectCtrl.disabledDays(date, mode)" datepicker-options="editProjectCtrl.dateOptions" ng-change="editProjectCtrl.validateDates(sprint, $index)"
+                            min-date="editProjectCtrl.dateOptions.minDate" required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="editProjectCtrl.openSprintStartPicker(sprint)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <br/>
+                    <span class="text-danger" ng-show="editSprint{{$index}}.sprintStart.$touched && editSprint{{$index}}.sprintStart.$error.required">Sprint start is required</span>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 nopadding">
+                    <label for="sprintStart">Ends on</label>
+                    <span>*</span>
+                    <p class="input-group">
+                        <input type="text" class="form-control" name="sprintEnd" placeholder="Enter sprint end date" is-open="sprint.endPicker.opened" uib-datepicker-popup ng-model="sprint.end" 
+                            close-text="Close" date-disabled="editProjectCtrl.disabledDays(date, mode)" datepicker-options="editProjectCtrl.dateOptions" ng-change="editProjectCtrl.validateDates(sprint, $index)"
+                            min-date="editProjectCtrl.dateOptions.minDate" required />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="editProjectCtrl.openSprintEndPicker(sprint)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <br/>
+                    <span class="text-danger" ng-show="editSprint{{$index}}.sprintEnd.$touched && editSprint{{$index}}.sprintEnd.$error.required">Sprint end is required</span>
+                    <span class="text-danger" ng-show="editSprint{{$index}}.sprintEnd.$error.endBeforeStart">Sprint's end date must be higher than sprint's start date</span>
+                </div>
+            </div>
+            <span class="text-danger" ng-show="editSprint{{$index}}.sprintEnd.$error.datesOverlap">Sprint's dates must be out of the range of dates of other sprints</span>
+            <span class="block" ng-show="sprint.workingDays">Work days: {{editProjectCtrl.countWorkdays(sprint)}}</span>
+            <button class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeSprint(sprint)" >Remove</button>
         </div>
         
-        <button type="submit" class="btn btn-primary" ng-click="editProjectCtrl.submit()">Save</button>
-        <a class="btn btn-default" ui-sref="projects.list">Cancel</a>
+        <button class="btn btn-primary btn-xs pull-right" ng-click="editProjectCtrl.addSprint()">Add sprint</button>
+        
+        <div class="page-actions-panel">
+            <button type="submit" class="btn btn-primary" ng-click="editProjectCtrl.submit()">Save</button>
+            <a class="btn btn-default" ui-sref="projects.list">Cancel</a>
+        </div>
     </form>
 </div>

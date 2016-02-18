@@ -1,4 +1,4 @@
-angular.module("manageLiteApp", [ 'ui.router', 'restangular', 'ngAnimate', 'toaster', 'angularSpinner' ]);
+angular.module("manageLiteApp", [ 'ui.router', 'ui.bootstrap', 'restangular', 'ngAnimate', 'toaster', 'angularSpinner' ]);
 
 angular.module("manageLiteApp").run([ '$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
