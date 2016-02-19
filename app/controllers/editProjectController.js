@@ -21,6 +21,7 @@ function editProjectController($scope, $stateParams, $state, $controller, $windo
             if (savedObject) {
                 toaster.pop('success', 'Success', 'Save successful');
                 ctrl.initializeProject(savedObject);
+                ctrl.initializeSprintsDatePickers();
                 $state.transitionTo('projects.edit', {
                     projectId : savedObject.id
                 }, {
@@ -40,6 +41,8 @@ function editProjectController($scope, $stateParams, $state, $controller, $windo
             if (sprint.start && sprint.end) {
                 var start = angular.copy(sprint.start);
                 var end = angular.copy(sprint.end);
+                start = typeof start === 'string' ? new Date(start) : start;
+                end = typeof end === 'string' ? new Date(end) : end;
                 var result = 0;
 
                 var currentDate = start;
@@ -161,6 +164,17 @@ function editProjectController($scope, $stateParams, $state, $controller, $windo
     };
 
     ctrl.initializeProject = function(project) {
+        if (project && project.sprints) {
+            angular.forEach(project.sprints, function(sprint, key) {
+                sprint.start = typeof sprint.start === 'string' ? new Date(sprint.start) : sprint.start;
+                sprint.end = typeof sprint.end === 'string' ? new Date(sprint.end) : sprint.end;
+            });
+            /*ctrl.project.sprints.forEach(function(sprint){
+                sprint.start = typeof sprint.start === 'string' ? new Date(sprint.start) : sprint.start;
+                sprint.end = typeof sprint.end === 'string' ? new Date(sprint.end) : sprint.end;
+            });*/
+        }
+        
         ctrl.project = project;
         ctrl.editStamp(ctrl.project);
         ctrl.setProjectTitle();

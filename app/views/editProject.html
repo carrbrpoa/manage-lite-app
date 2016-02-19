@@ -55,7 +55,7 @@
                 </div>
             </div>
             <span class="text-danger" ng-show="editSprint{{$index}}.sprintEnd.$error.datesOverlap">Sprint's dates must be out of the range of dates of other sprints</span>
-            <span class="block" ng-show="sprint.workingDays">Work days: {{editProjectCtrl.countWorkdays(sprint)}}</span>
+            <span class="block" ng-show="sprint.workingDays">Working days: {{editProjectCtrl.countWorkdays(sprint)}}</span>
             <button class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeSprint(sprint)" >Remove</button>
         </div>
         

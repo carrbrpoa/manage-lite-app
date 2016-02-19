@@ -17,6 +17,15 @@ angular.module('manageLiteApp').factory('projectService', [ 'Restangular', funct
                 return project.save();
             }
             else {
+                /*var clonedProject = angular.copy(project);
+                if (clonedProject.sprints) {
+                    angular.forEach(clonedProject.sprints, function(sprint, key) {
+                        delete sprint.workingDays;
+                        delete sprint.endPicker;
+                        delete sprint.startPicker;
+                    });
+                }*/
+                //return baseProjects.post(clonedProject);
                 return baseProjects.post(project);
             }
         },
