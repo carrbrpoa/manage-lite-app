@@ -1,4 +1,4 @@
-function parentController($state, toaster) {
+function parentController($state, $timeout, $window, toaster) {
     var ctrl = this;
     ctrl.unknownErrorMessage = 'Oops, an unknown error occurred';
 
@@ -19,6 +19,12 @@ function parentController($state, toaster) {
             $state.go(transitionTo);
         }
     };
+    
+    ctrl.scrollToEnd = function() {
+        $timeout(function() {
+            $window.scrollTo(0, document.body.scrollHeight);
+        }, 0, false);
+    };
 
     ctrl.editStamp = function(entity) {
         if (entity) {
@@ -31,6 +37,6 @@ function parentController($state, toaster) {
     };
 }
 
-parentController.$inject = [ '$state', 'toaster' ];
+parentController.$inject = [ '$state', '$timeout', '$window', 'toaster' ];
 
 angular.module('manageLiteApp').controller('parentController', parentController);

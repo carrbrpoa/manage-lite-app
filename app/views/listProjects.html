@@ -1,5 +1,13 @@
-<div ng-controller="projectsController as projectsCtrl">
+<div>
     <div ng-repeat="project in projectsCtrl.projects | orderBy:'name'">
-        <a class="project-name" ui-sref="projects.edit({projectId:project.id})" ng-class="{'disabled-entity': project.archived}">{{project.name}}</a>
+        <a class="project-name" ui-sref="projects.edit({projectId:project.id})" ng-class="{'disabled-entity': project.archived}">{{::project.name}}</a>
+        <div class="project-links pull-right">
+            <span ng-repeat="sprint in project.sprints">
+                <span class="" ng-hide="{{$index}} == 0">|</span>
+                <a class="btn btn-success btn-xs" ui-sref="projects.sprints({projectId:project.id, sprintId:sprint.id, projectName:project.name})" ng-class="{'current-sprint': projectsCtrl.activeSprint(sprint)}">{{::sprint.name}}</a>
+            </span>
+            <span class="">|</span>
+            <a class="" ui-sref="projects.backlog({projectId:project.id, sprints:project.sprints})">Backlog</a>
+        </div>
     </div>
 </div>

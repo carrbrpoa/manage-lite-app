@@ -1,7 +1,7 @@
-<div>
+<div ng-controller="projectsController as projectsCtrl">
     <h1>
         <span>Projects</span>
-        <a ui-sref="projects.edit" ng-hide="$state.includes('projects.edit')" class='btn btn-sm btn-success pull-right'>New</a>
+        <a ui-sref="projects.edit({projectId:null})" ng-hide="projectsCtrl.hideNewButton()" class='btn btn-sm btn-success pull-right'>New</a>
     </h1>
     <hr />
     

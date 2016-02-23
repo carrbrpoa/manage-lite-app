@@ -1,4 +1,4 @@
-function projectsController($scope, projectService) {
+function projectsController($scope, $state, projectService) {
     var ctrl = this;
     ctrl.projects = [];
 
@@ -7,7 +7,16 @@ function projectsController($scope, projectService) {
             ctrl.projects = response;
         }, function(error) {
         });
-    }
+    };
+    
+    ctrl.activeSprint = function(sprint) {
+        var now = new Date();
+        return new Date(sprint.start) <= now && new Date(sprint.end) >= now;
+    };
+    
+    ctrl.hideNewButton = function() {
+        return $state.includes('projects.edit') || $state.includes('projects.backlog');
+    };
     
     ctrl.activate = function() {
         // Load projects
@@ -15,6 +24,6 @@ function projectsController($scope, projectService) {
     }();
 };
 
-projectsController.$inject = ['$scope', 'projectService'];
+projectsController.$inject = ['$scope', '$state', 'projectService'];
 
 angular.module('manageLiteApp').controller('projectsController', projectsController);

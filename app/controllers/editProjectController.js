@@ -1,4 +1,4 @@
-function editProjectController($scope, $stateParams, $state, $controller, $window, $timeout, toaster, projectService) {
+function editProjectController($scope, $stateParams, $state, $controller, toaster, projectService) {
     var inherited = $controller('parentController', {
         $state : $state,
         toaster : toaster
@@ -149,9 +149,7 @@ function editProjectController($scope, $stateParams, $state, $controller, $windo
         ctrl.project.sprints.push({});
         ctrl.initializeSprintsDatePickers();
 
-        $timeout(function() {
-            $window.scrollTo(0, document.body.scrollHeight);
-        }, 0, false);
+        ctrl.scrollToEnd();
     };
 
     ctrl.removeSprint = function(sprint) {
@@ -184,15 +182,14 @@ function editProjectController($scope, $stateParams, $state, $controller, $windo
         if ($stateParams.projectId) {
             projectService.getProject($stateParams.projectId).then(function(project) {
                 ctrl.initializeProject(project);
+                ctrl.initializeSprintsDatePickers();
             }, function(error) {
                 ctrl.handleError(error, 'projects.list');
             });
         }
-
-        ctrl.initializeSprintsDatePickers();
     }();
 };
 
-editProjectController.$inject = [ '$scope', '$stateParams', '$state', '$controller', '$window', '$timeout', 'toaster', 'projectService' ];
+editProjectController.$inject = [ '$scope', '$stateParams', '$state', '$controller', 'toaster', 'projectService' ];
 
 angular.module('manageLiteApp').controller('editProjectController', editProjectController);

@@ -48,8 +48,22 @@ angular.module("manageLiteApp").config(
                 url : "",
                 templateUrl : "app/views/listProjects.html"
             }).state('projects.edit', {
-                url : "/edit/:projectId",
-                templateUrl : "app/views/editProject.html"
+                url : "/:projectId/edit",
+                templateUrl : "app/views/editProject.html",
+                params: {
+                    projectId: {squash: true, value: null}
+                }
+            }).state('projects.backlog', {
+                url : "/:projectId/backlog",
+                templateUrl : "app/views/backlog.html",
+                params : { sprints: null }
+            }).state('projects.sprints', {
+                url : "/:projectId/sprints/:sprintId",
+                templateUrl : "app/views/viewSprint.html",
+                params : { projectName: null }
+            }).state('projects.backlog-item-edit', {
+                url : "/:projectId/backlog/:storyId/edit",
+                templateUrl : "app/views/editStory.html"
             }).state('collaborators', {
                 url : "/collaborators",
                 abstract : true,
@@ -58,8 +72,11 @@ angular.module("manageLiteApp").config(
                 url : "",
                 templateUrl : "app/views/listCollaborators.html"
             }).state('collaborators.edit', {
-                url : "/edit/:collaboratorId",
-                templateUrl : "app/views/editCollaborator.html"
+                url : "/:collaboratorId/edit",
+                templateUrl : "app/views/editCollaborator.html",
+                params: {
+                    collaboratorId: {squash: true, value: null}
+                }
             }).state('roles', {
                 url : "/roles",
                 abstract : true,
@@ -68,8 +85,11 @@ angular.module("manageLiteApp").config(
                 url : "",
                 templateUrl : "app/views/listRoles.html"
             }).state('roles.edit', {
-                url : "/edit/:roleId",
-                templateUrl : "app/views/editRole.html"
+                url : "/:roleId/edit",
+                templateUrl : "app/views/editRole.html",
+                params: {
+                    roleId: {squash: true, value: null}
+                }
             }).state('settings', {
                 url : "/settings",
                 templateUrl : "app/views/settings.html"
@@ -109,3 +129,29 @@ angular.module("manageLiteApp").config(
             usSpinnerConfigProvider.setTheme('flatly', {color: '#000'});
             usSpinnerConfigProvider.setTheme('darkly', {color: '#fff'});
         } ]);
+
+angular.module("manageLiteApp").directive('bindEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keypress", function (event) {
+            if (event.which === 13) {
+                //scope.$apply(function (){
+                    scope.$eval(attrs.bindEnter);
+                //});
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
+angular.module("manageLiteApp").directive('focus', [ '$timeout', function($timeout) {
+    return {
+        restrict : 'A',
+
+        link : function(scope, element, attrs) {
+            $timeout(function() {
+                element[0].focus();
+            });
+        }
+    };
+} ]);

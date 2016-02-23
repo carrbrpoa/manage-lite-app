@@ -28,10 +28,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-1">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects.list">Projects</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators.list">Collaborators</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list">Roles</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings">Settings</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects.list" ng-click="menuCtrl.navigate()">Projects</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators.list" ng-click="menuCtrl.navigate()">Collaborators</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list" ng-click="menuCtrl.navigate()">Roles</a></li>
+                    <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings" ng-click="menuCtrl.navigate()">Settings</a></li>
                 </ul>
             </div>
         </div>
@@ -61,7 +61,7 @@
     </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.17/angular-ui-router.min.js"></script>
@@ -77,6 +77,8 @@
     <script src="app/services/roleService.js"></script>
     <script src="app/services/collaboratorService.js"></script>
     <script src="app/services/projectService.js"></script>
+    <script src="app/services/storyService.js"></script>
+    <script src="app/services/sprintService.js"></script>
     <script src="app/controllers/parentController.js"></script>
     <script src="app/controllers/menuController.js"></script>
     <script src="app/controllers/projectsController.js"></script>
@@ -86,5 +88,6 @@
     <script src="app/controllers/settingsController.js"></script>
     <script src="app/controllers/collaboratorsController.js"></script>
     <script src="app/controllers/editCollaboratorController.js"></script>
+    <script src="app/controllers/backlogController.js"></script>
 </body>
 </html>

@@ -3,8 +3,20 @@ body {
 }
 
 .project-name, .role-name, .collaborator-name, .project-name {
-	line-height: 30px;
 	font-size: 16px;
+}
+
+.project-name, .role-name, .collaborator-name, .project-name, .story-title, .project-links a, .project-links span {
+	line-height: 30px;
+}
+
+.project-links a.btn {
+    line-height: normal;
+}
+
+.project-links {
+	font-size: 14px;
+	text-align: right;
 }
 
 input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
@@ -58,6 +70,14 @@ input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
     border-color: #74898a;
 }
 
-.uib-datepicker .text-info {
+.uib-datepicker .text-info, .current-sprint {
 	font-weight: bolder;
+}
+
+.btn-success.current-sprint {
+	background-color: #14997f
+}
+
+.mr5 {
+	margin-right: 5px;
 }
