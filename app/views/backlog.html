@@ -1,5 +1,5 @@
 <div ng-controller="backlogController as backlogCtrl">
-    <h3>Backlog</h3>
+    <h3>{{::backlogCtrl.projectName}} - Backlog</h3>
 
     <h4>Stories</h4>
     <div ng-form="editStory{{$index}}" ng-repeat="story in backlogCtrl.stories">

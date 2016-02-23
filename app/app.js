@@ -56,7 +56,7 @@ angular.module("manageLiteApp").config(
             }).state('projects.backlog', {
                 url : "/:projectId/backlog",
                 templateUrl : "app/views/backlog.html",
-                params : { sprints: null }
+                params : { sprints: null, projectName: null }
             }).state('projects.sprints', {
                 url : "/:projectId/sprints/:sprintId",
                 templateUrl : "app/views/viewSprint.html",

@@ -7,7 +7,7 @@
                 <a class="btn btn-success btn-xs" ui-sref="projects.sprints({projectId:project.id, sprintId:sprint.id, projectName:project.name})" ng-class="{'current-sprint': projectsCtrl.activeSprint(sprint)}">{{::sprint.name}}</a>
             </span>
             <span class="">|</span>
-            <a class="" ui-sref="projects.backlog({projectId:project.id, sprints:project.sprints})">Backlog</a>
+            <a class="" ui-sref="projects.backlog({projectId:project.id, sprints:project.sprints, projectName:project.name})">Backlog</a>
         </div>
     </div>
 </div>
