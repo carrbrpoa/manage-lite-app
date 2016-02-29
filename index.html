@@ -9,53 +9,55 @@
 <link rel="stylesheet" ng-href="app/resources/themes/{{theme}}/bootstrap.min.css" />
 <link rel="stylesheet" ng-href="app/resources/themes/{{theme}}/custom.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" />
+<link rel="stylesheet" href="app/resources/libs/dragula.min.css" />
 <link rel="stylesheet" href="app/resources/styles.css" />
 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body ng-cloak>
     <toaster-container toaster-options="{'close-button': true, 'position-class': 'toast-top-right'}"></toaster-container>
     
-    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="menuController as menuCtrl">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                        class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">ManageLite</a>
+    <div ng-controller="menuController as menuCtrl">
+        <nav class="navbar navbar-default navbar-fixed-top" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ManageLite</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-1">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects.list" ng-click="menuCtrl.navigate()">Projects</a></li>
+                        <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators.list" ng-click="menuCtrl.navigate()">Collaborators</a></li>
+                        <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list" ng-click="menuCtrl.navigate()">Roles</a></li>
+                        <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings" ng-click="menuCtrl.navigate()">Settings</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-1">
-                <ul class="nav navbar-nav">
-                    <li ng-class="{ active: menuCtrl.isActive('/projects') }"><a ui-sref="projects.list" ng-click="menuCtrl.navigate()">Projects</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/collaborators') }"><a ui-sref="collaborators.list" ng-click="menuCtrl.navigate()">Collaborators</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/roles') }"><a ui-sref="roles.list" ng-click="menuCtrl.navigate()">Roles</a></li>
-                    <li ng-class="{ active: menuCtrl.isActive('/settings') }"><a ui-sref="settings" ng-click="menuCtrl.navigate()">Settings</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <span ng-if="theme === 'flatly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="flatly"></span>
-        <span ng-if="theme === 'darkly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="darkly"></span>
-        <div class="row">
-            <!-- 
-            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-3">
-                <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>
-                    <li role="presentation"><a href="#">Messages</a></li>
-                </ul>
-            </div>
-            <div class="col-md-10 col-lg-10 col-sm-10 col-xs-9">lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</div> -->
+        </nav>
+    
+        <div ng-class="{'container': !$state.includes('sprint'), 'container-fluid': $state.includes('sprint')}">
+            <span ng-if="theme === 'flatly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="flatly"></span>
+            <span ng-if="theme === 'darkly'" us-spinner="{radius:8, width:2, length:8}" spinner-on="showSpinner" spinner-theme="darkly"></span>
+                <!-- 
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xs-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">Profile</a></li>
+                        <li role="presentation"><a href="#">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-10 col-lg-10 col-sm-10 col-xs-9">lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</div> -->
             <div ui-view></div>
         </div>
     </div>
@@ -71,6 +73,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-spinner/0.8.0/angular-spinner.min.js"></script>
+    <script src="app/resources/libs/ui-router-tabs.js"></script>
+    <script src="app/resources/libs/angular-dragula.min.js"></script>
 
     <script src="app/app.js"></script>
     <script src="app/services/projectService.js"></script>
@@ -79,6 +83,7 @@
     <script src="app/services/projectService.js"></script>
     <script src="app/services/storyService.js"></script>
     <script src="app/services/sprintService.js"></script>
+    <script src="app/services/statusService.js"></script>
     <script src="app/controllers/parentController.js"></script>
     <script src="app/controllers/menuController.js"></script>
     <script src="app/controllers/projectsController.js"></script>
@@ -89,5 +94,7 @@
     <script src="app/controllers/collaboratorsController.js"></script>
     <script src="app/controllers/editCollaboratorController.js"></script>
     <script src="app/controllers/backlogController.js"></script>
+    <script src="app/controllers/sprintController.js"></script>
+    <script src="app/controllers/sprintBoardController.js"></script>
 </body>
 </html>

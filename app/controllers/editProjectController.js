@@ -1,4 +1,4 @@
-function editProjectController($scope, $stateParams, $state, $controller, toaster, projectService) {
+function editProjectController($scope, $stateParams, $state, $controller, toaster, projectService, statusService) {
     var inherited = $controller('parentController', {
         $state : $state,
         toaster : toaster
@@ -151,6 +151,22 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
 
         ctrl.scrollToEnd();
     };
+    
+    ctrl.addStatus = function() {
+        ctrl.project.statuses = ctrl.project.statuses || [];
+        ctrl.project.statuses.push({});
+
+        ctrl.scrollToEnd();
+    };
+    
+    ctrl.removeStatus = function(status) {
+        var index = ctrl.project.statuses.indexOf(status);
+        ctrl.project.statuses.splice(index, 1);
+
+        if (ctrl.project.statuses.length === 0) {
+            delete ctrl.project.statuses;
+        }
+    };
 
     ctrl.removeSprint = function(sprint) {
         var index = ctrl.project.sprints.indexOf(sprint);
@@ -177,19 +193,31 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
         ctrl.editStamp(ctrl.project);
         ctrl.setProjectTitle();
     };
+    
+    ctrl.getStatuses = function() {
+        statusService.getStatuses().then(function(response) {
+            ctrl.statuses = response;
+        }, function(error) {
+            ctrl.handleError(error);
+        });
+    };
 
     ctrl.activate = function() {
         if ($stateParams.projectId) {
             projectService.getProject($stateParams.projectId).then(function(project) {
                 ctrl.initializeProject(project);
                 ctrl.initializeSprintsDatePickers();
+                ctrl.getStatuses();
             }, function(error) {
                 ctrl.handleError(error, 'projects.list');
             });
         }
+        else {
+            ctrl.getStatuses();
+        }
     }();
 };
 
-editProjectController.$inject = [ '$scope', '$stateParams', '$state', '$controller', 'toaster', 'projectService' ];
+editProjectController.$inject = [ '$scope', '$stateParams', '$state', '$controller', 'toaster', 'projectService', 'statusService' ];
 
 angular.module('manageLiteApp').controller('editProjectController', editProjectController);

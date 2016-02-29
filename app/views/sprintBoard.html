@@ -1,0 +1,77 @@
+<div ng-controller="sprintBoardController as sprintBoardCtrl">
+    Board
+    <div class="sprint-board" style="border: 1px solid gray">
+        <!-- Cabeçalho -->
+        <div class="sb-header">
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                &nbsp;
+            </div>
+            <!-- para cada status possível (TODO) -->
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                <strong>Status 1</strong>
+            </div>
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                <strong>Status 2</strong>
+            </div>
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                <strong>Status 3</strong>
+            </div>
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red"> 
+                <strong>Status 4</strong>
+            </div>
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red"> 
+                <strong>Status 5</strong>
+            </div>
+        </div>
+        
+        <!-- para cada story -->
+        <div class="row sb-story">
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                Título da Story 1
+            </div>
+            <!-- para cada status possível (TODO) -->
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red" dragula='"first-bag"'>
+                <div class="sb-task">Tarefa 1</div>
+                <div class="sb-task">Tarefa 6</div>
+                <div class="sb-task">Tarefa 7</div>
+                <div class="sb-task">Tarefa 8</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red" dragula='"first-bag"'>
+                <div class="sb-task">Tarefa 2</div>
+                <div class="sb-task">Tarefa 9</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red" dragula='"first-bag"'>
+                <div class="sb-task">Tarefa 3</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red" dragula='"first-bag"'> 
+                <div class="sb-task">Tarefa 4</div>
+                <div class="sb-task">Tarefa 10</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red" dragula='"first-bag"'> 
+                <div class="sb-task">Tarefa 5</div>
+            </div>
+        </div>
+        
+        <div class="row sb-story">
+            <div class="col-md-2 col-lg-2" style="border: 1px solid red">
+                Título da Story 2
+            </div>
+            <!-- para cada status possível (TODO) -->
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red">
+                <div class="sb-task">Tarefa 1</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red">
+                <div class="sb-task">Tarefa 2</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red">
+                <div class="sb-task">Tarefa 3</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red"> 
+                <div class="sb-task">Tarefa 4</div>
+            </div>
+            <div class="col-md-2 col-lg-2 sb-status" style="border: 1px solid red"> 
+                <div class="sb-task">Tarefa 5</div>
+            </div>
+        </div>
+    </div>
+</div>

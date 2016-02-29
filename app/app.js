@@ -1,4 +1,4 @@
-angular.module("manageLiteApp", [ 'ui.router', 'ui.bootstrap', 'restangular', 'ngAnimate', 'toaster', 'angularSpinner' ]);
+angular.module("manageLiteApp", [ 'ui.router', 'ui.bootstrap', 'restangular', 'ngAnimate', 'toaster', 'angularSpinner', 'ui.router.tabs', angularDragula(angular) ]);
 
 angular.module("manageLiteApp").run([ '$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
@@ -57,10 +57,16 @@ angular.module("manageLiteApp").config(
                 url : "/:projectId/backlog",
                 templateUrl : "app/views/backlog.html",
                 params : { sprints: null, projectName: null }
-            }).state('projects.sprints', {
-                url : "/:projectId/sprints/:sprintId",
+            }).state('sprint', {
+                url : "/projects/:projectId/sprints/:sprintId",
                 templateUrl : "app/views/viewSprint.html",
-                params : { projectName: null }
+                params : { projectName: null, sprintName: null }
+            }).state('sprint.board', {
+                url : "/board",
+                templateUrl : "app/views/sprintBoard.html"
+            }).state('sprint.status', {
+                url : "/status",
+                templateUrl : "app/views/sprintStatus.html"
             }).state('projects.backlog-item-edit', {
                 url : "/:projectId/backlog/:storyId/edit",
                 templateUrl : "app/views/editStory.html"
@@ -130,19 +136,38 @@ angular.module("manageLiteApp").config(
             usSpinnerConfigProvider.setTheme('darkly', {color: '#fff'});
         } ]);
 
-angular.module("manageLiteApp").directive('bindEnter', function () {
+angular.module("manageLiteApp").directive('bindEnterEsc', function ($timeout) {
+    return function (scope, element, attrs) {
+        element.bind("keydown", function (event) {
+            if (event.which === 13 && attrs.bindEnter) { // 13 = enter key
+                $timeout(function() {
+                    scope.$eval(attrs.bindEnter);
+                    event.preventDefault();
+                });
+            }
+            else if(event.which === 27 && attrs.bindEsc) { // 27 = esc key
+                $timeout(function() {
+                    scope.$eval(attrs.bindEsc);
+                    event.preventDefault();
+                });
+            }
+        });
+    };
+});
+
+/*angular.module("manageLiteApp").directive('bindEsc', function () {
     return function (scope, element, attrs) {
         element.bind("keypress", function (event) {
-            if (event.which === 13) {
+            if(event.which === 27) { // 27 = esc key
                 //scope.$apply(function (){
-                    scope.$eval(attrs.bindEnter);
+                    scope.$eval(attrs.bindEsc);
                 //});
 
                 event.preventDefault();
             }
         });
     };
-});
+});*/
 
 angular.module("manageLiteApp").directive('focus', [ '$timeout', function($timeout) {
     return {

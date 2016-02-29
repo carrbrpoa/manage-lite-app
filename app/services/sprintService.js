@@ -12,7 +12,7 @@ angular.module('manageLiteApp').factory('sprintService', [ 'Restangular', functi
             }, function(error) {
                 return error;
             });
-        }/*,
+        },/*,
         saveSprint: function(sprint, projectId) {
             var baseSprints = mountBacklogBaseSprints(projectId);
             if (sprint.id > 0) {
@@ -21,14 +21,15 @@ angular.module('manageLiteApp').factory('sprintService', [ 'Restangular', functi
             else {
                 return baseSprints.post(sprint);
             }
-        },
-        getSprint: function(id) {
-            return baseSprints.get(id).then(function(sprint) {
+        },*/
+        getSprint: function(projectId, sprintId) {
+            var baseSprints = mountBaseSprints(projectId);
+            return baseSprints.get(sprintId).then(function(sprint) {
                 return sprint;
             }, function(error) {
                 return error;
             });
-        }*/
+        }
     }
 
     return sprintService;

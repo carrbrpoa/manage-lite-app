@@ -1,5 +1,5 @@
 <div ng-controller="backlogController as backlogCtrl">
-    <h3>{{::backlogCtrl.projectName}} - Backlog</h3>
+    <h3>{{backlogCtrl.projectName}} - Backlog</h3>
 
     <h4>Stories</h4>
     <div ng-form="editStory{{$index}}" ng-repeat="story in backlogCtrl.stories">
@@ -8,7 +8,7 @@
                 <label for="storyTitle">Title</label>
                 <span>*</span>
                 <input type="text" class="form-control" name="storyTitle" placeholder="Enter story title" ng-model="story.title"
-                    bind-enter="backlogCtrl.saveStory(story, $index)" ng-disabled="story.saving" focus required>
+                    bind-enter-esc bind-enter="backlogCtrl.saveStory(story, $index)" bind-esc="backlogCtrl.removeStory(story)" ng-disabled="story.saving" focus required>
                 <span class="text-danger" ng-show="editStory{{$index}}.storyTitle.$dirty && editStory{{$index}}.storyTitle.$invalid">Story
                     title is required</span>
             </div>
@@ -22,16 +22,16 @@
                 <a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Move to <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li ng-repeat="sprint in backlogCtrl.sprints"><a ng-click="backlogCtrl.moveStory(story, sprint.id)">{{::sprint.name}}</a></li>
+                    <li class="pointer" ng-repeat="sprint in backlogCtrl.sprints"><a ng-click="backlogCtrl.moveStory(story, sprint.id)">{{::sprint.name}}</a></li>
                 </ul>
             </div>
+            <button class="btn btn-danger btn-xs pull-right mr5" ng-click="backlogCtrl.removeStory(story)">Remove</button>
         </div>
     </div>
 
     <button id="btn-add-story" class="btn btn-primary btn-xs pull-right" ng-click="backlogCtrl.addStory()">Add story</button>
 
     <div class="page-actions-panel">
-        <button type="submit" class="btn btn-primary" ng-click="backlogCtrl.submit()">Save</button>
-        <a class="btn btn-default" ui-sref="projects.list">Cancel</a>
+        <a class="btn btn-warning" ui-sref="projects.list">Back</a>
     </div>
 </div>

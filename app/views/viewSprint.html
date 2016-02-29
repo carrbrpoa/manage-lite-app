@@ -1,3 +1,17 @@
-<div>
-View Sprint
+<script>
+/*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var target = $(e.target).attr("href") // activated tab
+    alert(target);
+  });*/
+</script>
+
+<div ng-controller="sprintController as sprintCtrl">
+    <h1>
+        <span>{{sprintCtrl.projectName}} - {{sprintCtrl.sprintName}}</span>
+    </h1>
+    <hr />
+
+    <tabs data="sprintCtrl.tabData" type="tabs" justified="true"></tabs>
+
+    <div ui-view></div>
 </div>

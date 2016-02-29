@@ -4,7 +4,7 @@
         <div class="project-links pull-right">
             <span ng-repeat="sprint in project.sprints">
                 <span class="" ng-hide="{{$index}} == 0">|</span>
-                <a class="btn btn-success btn-xs" ui-sref="projects.sprints({projectId:project.id, sprintId:sprint.id, projectName:project.name})" ng-class="{'current-sprint': projectsCtrl.activeSprint(sprint)}">{{::sprint.name}}</a>
+                <a class="btn btn-success btn-xs" ui-sref="sprint.board({projectId:project.id, sprintId:sprint.id, projectName:project.name, sprintName:sprint.name})" ng-class="{'current-sprint': projectsCtrl.activeSprint(sprint)}">{{::sprint.name}}</a>
             </span>
             <span class="">|</span>
             <a class="" ui-sref="projects.backlog({projectId:project.id, sprints:project.sprints, projectName:project.name})">Backlog</a>
