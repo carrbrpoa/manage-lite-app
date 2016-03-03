@@ -67,44 +67,56 @@
                 <span class="text-danger" ng-show="editSprint{{$index}}.sprintEnd.$error.datesOverlap">Sprint's dates must be out of the range
                     of dates of other sprints</span> <span class="block" ng-show="sprint.workingDays">Working days:
                     {{editProjectCtrl.countWorkdays(sprint)}}</span>
-                <button class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeSprint(sprint)">Remove</button>
+                <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeSprint(sprint)">Remove</button>
             </div>
 
-            <button class="btn btn-primary btn-xs pull-right" ng-click="editProjectCtrl.addSprint()">Add sprint</button>
+            <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="editProjectCtrl.addSprint()">Add sprint</button>
         </div>
 
         <div>
             <h3>Allowed Statuses</h3>
 
             <div ng-form="editStatus{{$index}}" ng-repeat="status in editProjectCtrl.project.statuses">
-                <div ng-show="status.create" class="panel panel-default panel-body">
+                <div ng-if="status.create" class="panel panel-default panel-body">
                     <div class="form-group">
                         <label for="statusName">Name</label>
                         <span>*</span>
                         <input type="text" class="form-control" name="statusName" placeholder="Enter status name" ng-model="status.name" required>
                         <span class="text-danger" ng-show="editStatus{{$index}}.statusName.$touched && editStatus{{$index}}.statusName.$invalid">Status name is required</span>
                     </div>
-                    <button class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeStatus(status)">Remove</button>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="status.projectStatus.showInBoards">
+                            Show in Boards
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeStatus(status)">Remove</button>
                 </div>
-                <div ng-hide="status.create" class="panel panel-default panel-body">
+                <div ng-if="!status.create" class="panel panel-default panel-body">
                     <div class="form-group">
                         <label for="status">Status</label>
                         <span>*</span>
-                        <select class="form-control" name="status" ng-model="status.id" ng-options="status.id as status.name for status in editProjectCtrl.statuses | orderBy:'name'" required>
+                        <select class="form-control" name="status" ng-model="status.id" ng-options="allStatus.id as allStatus.name for allStatus in editProjectCtrl.statuses | orderBy:'name'" required>
                             <option value="" class="text-muted">Choose status</option>
                         </select>
                         <span class="text-danger" ng-show="editStatus{{$index}}.status.$touched && editStatus{{$index}}.status.$invalid">Status is required</span>
                     </div>
-                    <button class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeStatus(status)">Remove</button>
-                    <button class="btn btn-primary btn-xs pull-right mr5" ng-click="status.create = true">New status</button>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="status.projectStatus.showInBoards">
+                            Show in Boards
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="editProjectCtrl.removeStatus(status)">Remove</button>
+                    <button type="button" class="btn btn-primary btn-xs pull-right mr5" ng-click="status.create = true">New status</button>
                 </div>
             </div>
 
-            <button class="btn btn-primary btn-xs pull-right" ng-click="editProjectCtrl.addStatus()">Add status</button>
+            <button type="button" class="btn btn-primary btn-xs pull-right" ng-click="editProjectCtrl.addStatus()">Add status</button>
         </div>
 
         <div class="page-actions-panel">
-            <button type="submit" class="btn btn-primary" ng-click="editProjectCtrl.submit()">Save</button>
+            <button type="submit" class="btn btn-primary" ng-click="editProjectCtrl.submit()" ng-disabled="!editProject.$valid">Save</button>
             <a class="btn btn-default" ui-sref="projects.list" ng-click="menuCtrl.navigate()">Cancel</a>
         </div>
     </form>

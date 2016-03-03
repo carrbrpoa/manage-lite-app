@@ -107,6 +107,8 @@ angular.module("manageLiteApp").config(
             /*RestangularProvider.setRestangularFields({
                 id : '_id.$oid'
             });*/
+            
+            //RestangularProvider.setDefaultHttpFields({'Cache-Control': 'no-cache'});
 
             RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
                 if (operation === 'put') {

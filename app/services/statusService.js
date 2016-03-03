@@ -5,7 +5,7 @@ angular.module('manageLiteApp').factory('statusService', [ 'Restangular', functi
     var statusService = {
 
         getStatuses : function(query) {
-            return baseStatuses.getList(query).then(function(statuses) {
+            return baseStatuses.getList(query, {'Cache-Control': 'no-cache'}).then(function(statuses) {
                 return statuses;
             }, function(error) {
                 return error;

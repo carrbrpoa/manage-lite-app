@@ -17,9 +17,26 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
     };
 
     ctrl.submit = function() {
+        if (!ctrl.project.id && ctrl.project.statuses.length > 0) {
+            ctrl.project.statuses.map(function(status) {
+                if (status.id) {
+                    var selectedStatus = _.select(ctrl.statuses, function(s){    
+                        return status.id === s.id;
+                    });
+                    
+                    if (selectedStatus.length === 1) {
+                        // angular.extend(status, selectedStatus[0]);
+                        /*status.name = selectedStatus[0].name;
+                        status.projectStatus.statusId = status.id;*/
+                    }
+                }
+            });
+        }
+        
         projectService.saveProject(ctrl.project).then(function(savedObject) {
             if (savedObject) {
                 toaster.pop('success', 'Success', 'Save successful');
+                ctrl.getStatuses();
                 ctrl.initializeProject(savedObject);
                 ctrl.initializeSprintsDatePickers();
                 $state.transitionTo('projects.edit', {
@@ -154,7 +171,7 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
     
     ctrl.addStatus = function() {
         ctrl.project.statuses = ctrl.project.statuses || [];
-        ctrl.project.statuses.push({});
+        ctrl.project.statuses.push({projectStatus: {showInBoards: true}});
 
         ctrl.scrollToEnd();
     };
@@ -183,10 +200,15 @@ function editProjectController($scope, $stateParams, $state, $controller, toaste
                 sprint.start = typeof sprint.start === 'string' ? new Date(sprint.start) : sprint.start;
                 sprint.end = typeof sprint.end === 'string' ? new Date(sprint.end) : sprint.end;
             });
-            /*ctrl.project.sprints.forEach(function(sprint){
-                sprint.start = typeof sprint.start === 'string' ? new Date(sprint.start) : sprint.start;
-                sprint.end = typeof sprint.end === 'string' ? new Date(sprint.end) : sprint.end;
-            });*/
+            /*
+             * ctrl.project.sprints.forEach(function(sprint){ sprint.start =
+             * typeof sprint.start === 'string' ? new Date(sprint.start) :
+             * sprint.start; sprint.end = typeof sprint.end === 'string' ? new
+             * Date(sprint.end) : sprint.end; });
+             */
+            angular.forEach(project.statuses, function(status, key) {
+                status.projectStatus = status.projectStatus || {}; 
+            });
         }
         
         ctrl.project = project;
